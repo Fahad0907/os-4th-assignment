@@ -1,69 +1,71 @@
 # 4th assignment
-
-This project contains a **Django backend (Dockerized)** and a **React frontend (Vite build)** deployed on Ubuntu servers using **Nginx**.
-
 ---
 
-## 📁 Screenshots
-
-All screenshots are stored in the `/ss` folder:
-
-- `/ss/database.png` → Database setup confirmation  
-- `/ss/backend-end-nginx.png` → Backend Nginx configuration  
-- `/ss/backend-running.png` → Backend running status  
-- `/ss/front-end.png` → Frontend running status  
-
----
-
-## ⚙️ Backend (Django + Docker + Nginx)
-
-- Django runs inside a Docker container
-- Gunicorn used as application server
-- Nginx acts as reverse proxy
-
-### 🔧 Flow
-Client → Nginx → Docker (Gunicorn) → Django API
-
-### 📸 Evidence
-See:
-- `ss/backend-end-nginx.png`
-- `ss/backend-running.png`
-- `ss/database.png`
+### Flow
+Client → Nginx → Docker (Gunicorn) → Django API → PostgreSQL
 
 ---
 
 ## 🎨 Frontend (React Vite + Nginx)
 
 - Built using Vite (`dist/`)
-- Served as static files via Nginx
+- Served as static files using Nginx
+- Communicates with backend via REST API
 
-### 🔧 Flow
-Client → Nginx → React static build
+### Flow
+Client → Nginx → React static build → Backend API
 
-### 📸 Evidence
-See:
-- `ss/front-end.png`
+---
+
+## 🗄️ Database (PostgreSQL)
+
+- Hosted on separate EC2 instance
+- Connected securely from backend server
+- Stores all application data
+
+---
+
+## 📸 Evidence (Screenshots)
+
+### Backend Nginx Configuration
+![Backend Nginx](./ss/back-end_nginx.png)
+
+### Backend Running Confirmation
+![Backend Running](./ss/backend-running.png)
+
+### Database Setup
+![Database](./ss/database.png)
+
+### Frontend Running Confirmation
+![Frontend Running](./ss/front-end.png)
 
 ---
 
 ## 🌐 Nginx Role
 
-- Backend server: Reverse proxy to Django (port 8000)
-- Frontend server: Serves React static files
-- Handles routing for production deployment
+- Reverse proxy for Django backend
+- Static file hosting for React frontend
+- Handles routing and request forwarding
 
 ---
 
-## 🚀 Summary
+## 🚀 Deployment Summary
 
-- Backend: Django + Docker + Gunicorn + Nginx  
-- Frontend: React (Vite build) + Nginx  
-- Communication: REST API between frontend and backend  
+- Backend: Django + Docker + Gunicorn + Nginx
+- Frontend: React (Vite build) + Nginx
+- Database: PostgreSQL (separate EC2)
+- Communication: REST API between services
 
 ---
 
 ## 📌 Notes
 
-- Ensure ports **80/443** are open in security group
-- HTTPS can be enabled using **Certbot**
-- Static files are served via Nginx in production
+- Ensure EC2 security groups allow:
+  - HTTP (80)
+  - HTTPS (443 optional)
+  - Backend internal communication ports if needed
+
+- HTTPS can be enabled using Certbot (`sudo certbot --nginx`)
+- Backend uses Docker for isolation and scalability
+
+---
