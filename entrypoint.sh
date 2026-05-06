@@ -2,7 +2,7 @@
 
 # Wait for database to be ready
 echo "Waiting for PostgreSQL to be ready..."
-while ! nc -z 54.234.248.53 5432; do
+while ! nc -z 54.234.250.106 5432; do
   sleep 1
 done
 echo "PostgreSQL is ready!"
